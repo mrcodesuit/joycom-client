@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Navbar, Nav, Dropdown, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 
@@ -28,19 +29,19 @@ const NavBar = () => {
 	const menuBar = user ? (
 		<Navbar collapseOnSelect bg='primary' variant='dark' expand='lg'>
 			<Container>
-				<a href='/'>
+				<Link to='/'>
 					<Navbar.Brand>
 						<span className='icon-logo'></span>Joycom
 					</Navbar.Brand>
-				</a>
+				</Link>
 				{dimensions.width > 991 ? (
 					<Nav>
-						<Nav.Link href={`/myAccount/${user._id}`} className='myAccount'>
+						<Link to={`/myAccount/${user._id}`} className='myAccount nav-link'>
 							Mein Profil<i className='icon-gear'></i>
-						</Nav.Link>
-						<Nav.Link href='/' className='myAccount' onClick={logout}>
+						</Link>
+						<Link to='/' className='myAccount nav-link' onClick={logout}>
 							Ausloggen<i className='icon-log-out'></i>
-						</Nav.Link>
+						</Link>
 					</Nav>
 				) : (
 					<Dropdown className='user-dropdown' drop='left'>
@@ -48,21 +49,23 @@ const NavBar = () => {
 							<i className='icon-user'></i>
 						</Dropdown.Toggle>
 						<Dropdown.Menu className='border-inverted'>
-							<Dropdown.Item
-								className='nav-link myAccount'
-								href={`/myAccount/${user._id}`}
+							<Link
+								to={`/myAccount/${user._id}`}
+								className='nav-link myAccount dropdown-item'
 							>
 								Mein Profil<i className='icon-gear'></i>
-							</Dropdown.Item>
+							</Link>
+
 							<Dropdown.Divider />
-							<Dropdown.Item
-								className='nav-link logout'
-								href='/'
+
+							<Link
+								className='nav-link logout dropdown-item'
+								to='/'
 								onClick={logout}
 							>
 								Ausloggen
 								<i className='icon-log-out'></i>
-							</Dropdown.Item>
+							</Link>
 
 							{/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item> */}
 						</Dropdown.Menu>
@@ -72,13 +75,13 @@ const NavBar = () => {
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='ml-auto'>
-						<Nav.Link href='/aboutUs' className='aboutUs'>
+						<Link to='/aboutUs' className='aboutUs nav-link'>
 							Über uns
-						</Nav.Link>
+						</Link>
 
-						<Nav.Link href='/idea' className='idea'>
+						<Link to='/idea' className='idea nav-link'>
 							Idee
-						</Nav.Link>
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
@@ -86,18 +89,20 @@ const NavBar = () => {
 	) : (
 		<Navbar collapseOnSelect bg='primary' variant='dark' expand='lg'>
 			<Container>
-				<a href='/'>
+				<Link to='/'>
 					<Navbar.Brand>
 						<span className='icon-logo'></span>Joycom
 					</Navbar.Brand>
-				</a>
+				</Link>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav>
-						<Nav.Link href='/login'>
+						<Link to='/login' className='nav-link'>
 							Einloggen<i className='icon-key'></i>
-						</Nav.Link>
-						<Nav.Link href='/register'>Registrieren</Nav.Link>
+						</Link>
+						<Link to='/register' className='nav-link'>
+							Registrieren
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

@@ -12,6 +12,8 @@
 		"apollo-link-context": "^1.0.19",
 		"apollo-link-http": "^1.5.16",
 		"bootswatch": "^4.4.1",
+		"graphql": "^14.6.0",
+		"graphql-tag": "^2.10.3",
 		"jwt-decode": "^2.2.0",
 		"moment": "^2.24.0",
 		"react": "^16.12.0",

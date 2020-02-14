@@ -11,7 +11,7 @@ import App from './App';
 
 // GraphQL-HTTP-Link definieren
 const httpLink = createHttpLink({
-	uri: 'https://pacific-temple-59426.herokuapp.com/graphql'
+	uri: 'https://pacific-temple-59426.herokuapp.com/'
 });
 
 //Kontext definieren

@@ -228,13 +228,15 @@ const SingleEventPage = props => {
 							</Card.Body>
 						</Card>
 
-						<Card className='comments'>
-							<Comments
-								eventId={eventId}
-								comments={comments}
-								category={category}
-							/>
-						</Card>
+						{user && (
+							<Card className='comments'>
+								<Comments
+									eventId={eventId}
+									comments={comments}
+									category={category}
+								/>
+							</Card>
+						)}
 					</Container>
 				</div>
 			</>

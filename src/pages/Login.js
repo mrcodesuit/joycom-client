@@ -52,7 +52,7 @@ const Login = props => {
 			<Jumbotron className='jumbotron-login'>
 				<Container>
 					<Row>
-						<Col xs={9} md={6} lg={4}>
+						<Col xs={12} md={6} lg={4}>
 							<div className='form-wrapper'>
 								<h2 className='page-header'>Einloggen</h2>
 								<p className='page-header-subtitle'>

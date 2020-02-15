@@ -60,7 +60,7 @@ const Register = props => {
 			<Jumbotron className='jumbotron-register'>
 				<Container>
 					<Row>
-						<Col xs={9} md={6} lg={4}>
+						<Col xs={12} md={6} lg={4}>
 							<div className='form-wrapper'>
 								<h2 className='page-header'>Registrieren</h2>
 								<p className='page-header-subtitle'>

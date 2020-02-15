@@ -237,10 +237,11 @@ body {
 .jumbotron {
 	background: transparent;
 	background-size: cover;
-	height: 30vh;
+	height: 45vh;
 }
 .jumbotron-login {
 	background-image: url('https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+	height: 60vh;
 }
 .jumbotron-home {
 	background-image: url('https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
@@ -523,6 +524,9 @@ body {
 		cursor: pointer;
 		transform: rotate(0deg);
 		transition: all 0.5s;
+		@media @max-sm {
+			display: none;
+		}
 		&::after {
 			font-family: 'icomoon';
 			content: '\e902';

@@ -4,11 +4,12 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col, Button, Form, ListGroup } from 'react-bootstrap';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import de from 'date-fns/locale/de';
+import history from '../history';
 
 import { FETCH_CATEGORIES_QUERY } from '../util/graphql';
 import { useForm } from '../util/hooks';
 
-const EventForm = ({ categoryName }, props) => {
+const EventForm = ({ categoryName }) => {
 	const [errors, setErrors] = useState({});
 
 	const [selectCategory, setSelectCategory] = useState(categoryName);
@@ -58,7 +59,7 @@ const EventForm = ({ categoryName }, props) => {
 		//Nachdem das Event erstellt wurde wird die Query der Seite aktualisiert
 		update(proxy, result) {
 			const eventNewId = result.data.createEvent._id;
-			window.location.href = `/singleEventPage/${eventNewId}`;
+			history.push(`/singleEventPage/${eventNewId}`);
 			// data.getCategories = [categoryEventCountUpdate[0], ...data.getCategories];
 			// proxy.writeQuery({ query: FETCH_CATEGORIES_QUERY, data });
 

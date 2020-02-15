@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import {
 	Card,
@@ -217,11 +218,10 @@ const SingleEventPage = props => {
 												<Tooltip id='tooltip-disabled'>{'Zum Login!'}</Tooltip>
 											}
 										>
-											<Button
-												variant='info'
-												className='icon-plus-circle'
-												href='/login'
-											></Button>
+											<Link
+												to='/login'
+												className='icon-plus-circle btn btn-info'
+											></Link>
 										</OverlayTrigger>
 									</>
 								)}

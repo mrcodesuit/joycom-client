@@ -96,9 +96,9 @@ const SingleEventPage = props => {
 								<span className='icon-left-circle'></span>
 								Zurück
 							</Button>
-							<Button href='/'>
+							<Link to='/' className='btn btn btn-primary'>
 								<span className='icon-categories'></span> zu den Kategorien
-							</Button>
+							</Link>
 						</div>
 						<Card className='event'>
 							<Card.Body className='card-top'>

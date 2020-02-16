@@ -11,11 +11,12 @@ import {
 	ListGroup,
 	Jumbotron
 } from 'react-bootstrap';
+import history from '../history';
 
 import { AuthContext } from '../context/auth';
 import { useForm } from '../util/hooks';
 
-const Login = props => {
+const Login = () => {
 	const authContext = useContext(AuthContext);
 
 	const [validated, setValidated] = useState(false);
@@ -34,7 +35,7 @@ const Login = props => {
 	const [loginUser, { loading }] = useMutation(LOGIN_USER, {
 		update(_, { data: { login: userData } }) {
 			authContext.login(userData);
-			props.history.push('/');
+			history.push('/');
 		},
 		onError(err) {
 			setErrors(err.graphQLErrors[0].extensions.exception.errors);

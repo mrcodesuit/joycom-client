@@ -54,6 +54,7 @@ const Comments = ({ eventId, comments, category }) => {
 						variant='primary'
 						type='submit'
 						onClick={createComment}
+						disabled={comment < 1 ? true : false}
 					>
 						Kommentieren
 					</Button>

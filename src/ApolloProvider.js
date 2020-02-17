@@ -27,8 +27,7 @@ const authLink = setContext(() => {
 // Apollo-Client erstellen
 const client = new ApolloClient({
 	link: authLink.concat(httpLink),
-	cache: new InMemoryCache(),
-	connectToDevTools: true
+	cache: new InMemoryCache()
 });
 
 // Apollo-Client als Kontext von React festlegen

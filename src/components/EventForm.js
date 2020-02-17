@@ -4,7 +4,6 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col, Button, Form, ListGroup } from 'react-bootstrap';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import de from 'date-fns/locale/de';
-import history from '../history';
 import { withRouter } from 'react-router-dom';
 
 import {
@@ -13,7 +12,7 @@ import {
 } from '../util/graphql';
 import { useForm } from '../util/hooks';
 
-const EventForm = ({ categoryName, categoryId }) => {
+const EventForm = ({ categoryName, categoryId, history }) => {
 	const [errors, setErrors] = useState({});
 
 	const [selectCategory, setSelectCategory] = useState(categoryName);

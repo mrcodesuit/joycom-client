@@ -12,6 +12,7 @@ import {
 	ListGroup,
 	Jumbotron
 } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 import avatar_1 from '../assets/img/avatar-0.png';
 import avatar_2 from '../assets/img/avatar-1.png';
@@ -22,6 +23,7 @@ import { AuthContext } from '../context/auth';
 import { useForm } from '../util/hooks';
 
 const Register = props => {
+	let history = useHistory();
 	const authContext = useContext(AuthContext);
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
@@ -42,7 +44,7 @@ const Register = props => {
 	const [addUser, { loading }] = useMutation(REGISTER_USER, {
 		update(_, { data: { register: userData } }) {
 			authContext.login(userData);
-			props.history.push('/');
+			history.push('/');
 		},
 		onError(err) {
 			setErrors(err.graphQLErrors[0].extensions.exception.errors);

@@ -4,11 +4,11 @@ import moment from 'moment';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Button, Container, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import history from '../history';
+import { Link, useHistory } from 'react-router-dom';
 
 const MyAccount = props => {
 	const userId = props.match.params.userId;
+	let history = useHistory();
 
 	const { loading, data } = useQuery(GET_USER_QUERY, {
 		variables: { userId }

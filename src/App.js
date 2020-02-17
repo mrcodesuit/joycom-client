@@ -1,6 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
-import history from './history';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import 'bootswatch/dist/minty/bootstrap.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -27,7 +26,7 @@ function App() {
 	return (
 		<>
 			<AuthProvider>
-				<Router history={history}>
+				<Router>
 					<NavBar />
 					<Route exact path='/' component={Home} />
 					<AuthRoute exact path='/login' component={Login} />

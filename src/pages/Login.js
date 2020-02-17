@@ -11,13 +11,14 @@ import {
 	ListGroup,
 	Jumbotron
 } from 'react-bootstrap';
-import history from '../history';
+import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 import { useForm } from '../util/hooks';
 
 const Login = () => {
 	const authContext = useContext(AuthContext);
+	let history = useHistory();
 
 	const [validated, setValidated] = useState(false);
 	const [errors, setErrors] = useState({});

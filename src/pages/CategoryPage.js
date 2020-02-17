@@ -10,7 +10,7 @@ import {
 	Spinner,
 	Button
 } from 'react-bootstrap';
-import history from '../history';
+import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 import { FETCH_CATEGORY_EVENTS_QUERY } from '../util/graphql';
@@ -20,6 +20,7 @@ import EventForm from '../components/EventForm';
 const CategoryPage = props => {
 	const categoryId = props.match.params.categoryId;
 	const { user } = useContext(AuthContext);
+	let history = useHistory();
 
 	const { loading, data } = useQuery(FETCH_CATEGORY_EVENTS_QUERY, {
 		variables: { categoryId }

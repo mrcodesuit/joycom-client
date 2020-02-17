@@ -12,7 +12,7 @@ import {
 import moment from 'moment';
 import 'moment/locale/de';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import history from '../history';
+import { useHistory } from 'react-router-dom';
 
 import { FETCH_EVENT_QUERY } from '../util/graphql';
 import LikeButton from '../components/LikeButton';
@@ -24,6 +24,7 @@ import { AuthContext } from '../context/auth';
 
 const SingleEventPage = props => {
 	const { user } = useContext(AuthContext);
+	let history = useHistory();
 
 	const eventId = props.match.params.eventId;
 	const { data } = useQuery(FETCH_EVENT_QUERY, {

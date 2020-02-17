@@ -6,8 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const LikeButton = ({ user, eventId, likes, likeCount }) => {
 	const [liked, setLiked] = useState(false);
-	// const categoryPageURL = history.location.pathname;
-
+	
 	useEffect(() => {
 		if (user && likes.find(like => like.username === user.username)) {
 			setLiked(true);

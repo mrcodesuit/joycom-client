@@ -35,11 +35,11 @@ const SingleEventPage = props => {
 	});
 
 	const pageBack = () => {
-		history.back();
+		history.go(-1);
 	};
 
 	function deleteEventCallback() {
-		history.back(2);
+		history.go(-2);
 	}
 
 	function addUserReduceCount() {

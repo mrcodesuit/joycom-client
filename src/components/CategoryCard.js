@@ -20,7 +20,7 @@ const CategoryCard = ({ category }) => {
 							<>
 								<div>
 									<div className='card-link counter'>Events: {eventCount}</div>
-									<div className='card-link arrow'>Events: {eventCount}</div>
+									<div className='card-link arrow'></div>
 								</div>
 							</>
 						)}

@@ -15,7 +15,7 @@ const MyAccount = props => {
 	});
 
 	const pageBack = () => {
-		history.back();
+		history.go(-1);
 	};
 
 	let myAccountMarkup;

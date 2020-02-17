@@ -27,7 +27,7 @@ const CategoryPage = props => {
 	console.log(data);
 
 	const pageBack = () => {
-		history.back();
+		history.go(-1);
 	};
 
 	if (data) {

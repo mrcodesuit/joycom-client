@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col, Button, Form, ListGroup } from 'react-bootstrap';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import de from 'date-fns/locale/de';
-import { useHistory } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
 
 import {
 	FETCH_CATEGORIES_QUERY,
@@ -321,4 +321,4 @@ const CREATE_EVENT_MUTATION = gql`
 	}
 `;
 
-export default EventForm;
+export default withRouter(EventForm);

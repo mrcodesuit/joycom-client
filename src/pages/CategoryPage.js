@@ -25,7 +25,6 @@ const CategoryPage = props => {
 	const { loading, data } = useQuery(FETCH_CATEGORY_EVENTS_QUERY, {
 		variables: { categoryId }
 	});
-	console.log(data);
 
 	const pageBack = () => {
 		history.go(-1);

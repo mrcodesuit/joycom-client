@@ -70,7 +70,6 @@ const EventForm = ({ categoryName, categoryId, callback }) => {
 				query: FETCH_CATEGORY_EVENTS_QUERY,
 				variables: { categoryId }
 			});
-
 			proxy.writeQuery({
 				query: FETCH_CATEGORY_EVENTS_QUERY,
 				variables: { categoryId },

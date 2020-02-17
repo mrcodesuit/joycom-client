@@ -160,7 +160,11 @@ const SingleEventPage = props => {
 							<Card.Body className='card-action'>
 								<p className='creator'>erstellt von {creator}</p>
 								{user && user.username === creator ? (
-									<DeleteButton eventId={_id} callback={deleteEventCallback} />
+									<DeleteButton
+										eventId={_id}
+										callback={deleteEventCallback}
+										category={category}
+									/>
 								) : user ? (
 									userList.find(
 										userItem => userItem.username === user.username

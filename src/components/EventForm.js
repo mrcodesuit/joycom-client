@@ -6,10 +6,13 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import de from 'date-fns/locale/de';
 import history from '../history';
 
-import { FETCH_CATEGORIES_QUERY } from '../util/graphql';
+import {
+	FETCH_CATEGORIES_QUERY,
+	FETCH_CATEGORY_EVENTS_QUERY
+} from '../util/graphql';
 import { useForm } from '../util/hooks';
 
-const EventForm = ({ categoryName }) => {
+const EventForm = ({ categoryName, categoryId }) => {
 	const [errors, setErrors] = useState({});
 
 	const [selectCategory, setSelectCategory] = useState(categoryName);
@@ -39,7 +42,10 @@ const EventForm = ({ categoryName }) => {
 	};
 
 	const { loading: loadingFCQ, data: dataFCQ, error: errorFCQ } = useQuery(
-		FETCH_CATEGORIES_QUERY
+		FETCH_CATEGORIES_QUERY,
+		{
+			// fetchPolicy: 'no-cache'
+		}
 	);
 
 	const { values, onChange, onSubmit } = useForm(
@@ -59,9 +65,40 @@ const EventForm = ({ categoryName }) => {
 		//Nachdem das Event erstellt wurde wird die Query der Seite aktualisiert
 		update(proxy, result) {
 			const eventNewId = result.data.createEvent._id;
+
+			const prevData = proxy.readQuery({
+				query: FETCH_CATEGORY_EVENTS_QUERY,
+				variables: { categoryId }
+			});
+			console.log(prevData.getEventsCategory);
+			proxy.writeQuery({
+				query: FETCH_CATEGORY_EVENTS_QUERY,
+				variables: { categoryId },
+				data: {
+					getEventsCategory: [
+						result.data.createEvent,
+						...prevData.getEventsCategory
+					]
+				}
+			});
+
+			const prevData2 = proxy.readQuery({
+				query: FETCH_CATEGORIES_QUERY
+			});
+			console.log(prevData2.getCategories);
+
+			proxy.writeQuery({
+				query: FETCH_CATEGORIES_QUERY,
+				data: {
+					getCategories: prevData2.getCategories.forEach(category => {
+						if (category._id.toString() === categoryId) {
+							category.eventCount += 1;
+						}
+					})
+				}
+			});
+
 			history.push(`/singleEventPage/${eventNewId}`);
-			// data.getCategories = [categoryEventCountUpdate[0], ...data.getCategories];
-			// proxy.writeQuery({ query: FETCH_CATEGORIES_QUERY, data });
 
 			//Eingabefelder werden auf den Ausgangswert zurückgesetzt
 			values.name = '';

@@ -6,7 +6,8 @@ import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import {
 	FETCH_CATEGORY_EVENTS_QUERY,
-	FETCH_CATEGORY_QUERY
+	FETCH_CATEGORY_QUERY,
+	FETCH_CATEGORIES_QUERY
 } from '../util/graphql';
 
 const DeleteButton = ({ eventId, commentId, category, callback }) => {
@@ -16,7 +17,9 @@ const DeleteButton = ({ eventId, commentId, category, callback }) => {
 
 	const { data } = useQuery(FETCH_CATEGORY_QUERY, {
 		variables: { category }
+		// fetchPolicy: 'no-cache'
 	});
+
 	if (data) {
 		var { _id } = data.getCategory;
 	}
@@ -39,7 +42,22 @@ const DeleteButton = ({ eventId, commentId, category, callback }) => {
 						)
 					}
 				});
+
+				const prevData = proxy.readQuery({
+					query: FETCH_CATEGORIES_QUERY
+				});
+				proxy.writeQuery({
+					query: FETCH_CATEGORIES_QUERY,
+					data: {
+						getCategories: prevData.getCategories.forEach(category => {
+							if (category._id.toString() === _id) {
+								category.eventCount -= 1;
+							}
+						})
+					}
+				});
 			}
+
 			if (callback) callback();
 		},
 		variables: { eventId, commentId }

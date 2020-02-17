@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
-	Accordion,
-	Container,
-	Card,
+	Container
 	Row,
 	Col,
 	Button,
@@ -11,27 +9,15 @@ import {
 	Spinner
 } from 'react-bootstrap';
 import { useQuery } from '@apollo/react-hooks';
-import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 import { FETCH_CATEGORIES_QUERY } from '../util/graphql';
 
 import CategoryCard from '../components/CategoryCard';
-import EventForm from '../components/EventForm';
 
 const Home = () => {
 	const { user } = useContext(AuthContext);
 	const { loading, data } = useQuery(FETCH_CATEGORIES_QUERY);
-	let history = useHistory();
-
-	// const  = proxy.readQuery({
-	// 	query: FETCH_CATEGORY_EVENTS_QUERY,
-	// 	variables: { categoryId: _id }
-	// });
-
-	const goToCallback = (eventNewId) => {
-		history.push(`/singleEventPage/${eventNewId}`);
-	};
 
 	return (
 		<>
@@ -66,31 +52,8 @@ const Home = () => {
 				)}
 
 				<Container>
-					{user ? (
-						<Accordion className='addEventAccordion'>
-							<Card>
-								<Accordion.Toggle
-									className='mt-3 toggleButton'
-									as={Button}
-									variant='primary'
-									eventKey='0'
-								>
-									<span className='icon-pencil'></span>
-									Neues Event
-								</Accordion.Toggle>
-
-								<Accordion.Collapse eventKey='0'>
-									<Card.Body>
-										<EventForm callback={goToCallback} />
-									</Card.Body>
-								</Accordion.Collapse>
-							</Card>
-						</Accordion>
-					) : (
-						<></>
-					)}
 					<div className='categories content-warpper'>
-						<h2 className='page-header'>Kategorien</h2>
+						<h2 className='page-header mt-5'>Kategorien</h2>
 						{loading ? (
 							<>
 								<Spinner animation='border' role='status'>

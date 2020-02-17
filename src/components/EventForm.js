@@ -40,12 +40,7 @@ const EventForm = ({ categoryName, categoryId, callback }) => {
 		category: ''
 	};
 
-	const { loading: loadingFCQ, data: dataFCQ, error: errorFCQ } = useQuery(
-		FETCH_CATEGORIES_QUERY,
-		{
-			// fetchPolicy: 'no-cache'
-		}
-	);
+	const { data: dataFCQ } = useQuery(FETCH_CATEGORIES_QUERY);
 
 	const { values, onChange, onSubmit } = useForm(
 		createEventCallback,
@@ -59,7 +54,7 @@ const EventForm = ({ categoryName, categoryId, callback }) => {
 		category: selectCategory
 	};
 
-	const [createEvent, { loading }] = useMutation(CREATE_EVENT_MUTATION, {
+	const [createEvent] = useMutation(CREATE_EVENT_MUTATION, {
 		variables: valuesNew,
 		//Nachdem das Event erstellt wurde wird die Query der Seite aktualisiert
 		update(proxy, result) {

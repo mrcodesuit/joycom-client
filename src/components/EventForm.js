@@ -5,6 +5,7 @@ import { Container, Row, Col, Button, Form, ListGroup } from 'react-bootstrap';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import de from 'date-fns/locale/de';
 import history from '../history';
+import { withRouter } from 'react-router-dom';
 
 import {
 	FETCH_CATEGORIES_QUERY,
@@ -70,7 +71,7 @@ const EventForm = ({ categoryName, categoryId }) => {
 				query: FETCH_CATEGORY_EVENTS_QUERY,
 				variables: { categoryId }
 			});
-			console.log(prevData.getEventsCategory);
+
 			proxy.writeQuery({
 				query: FETCH_CATEGORY_EVENTS_QUERY,
 				variables: { categoryId },
@@ -85,7 +86,6 @@ const EventForm = ({ categoryName, categoryId }) => {
 			const prevData2 = proxy.readQuery({
 				query: FETCH_CATEGORIES_QUERY
 			});
-			console.log(prevData2.getCategories);
 
 			proxy.writeQuery({
 				query: FETCH_CATEGORIES_QUERY,
@@ -321,4 +321,4 @@ const CREATE_EVENT_MUTATION = gql`
 	}
 `;
 
-export default EventForm;
+export default withRouter(EventForm);

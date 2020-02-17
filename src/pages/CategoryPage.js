@@ -31,9 +31,9 @@ const CategoryPage = props => {
 		history.go(-1);
 	};
 
-	const goToCallback = eventNewId => {
+	function sendData(eventNewId) {
 		history.push(`/singleEventPage/${eventNewId}`);
-	};
+	}
 
 	if (data) {
 		var eventsCount = data.getEventsCategory.length > 0;
@@ -78,7 +78,7 @@ const CategoryPage = props => {
 										<Card.Body>
 											<EventForm
 												categoryName={categoryName}
-												callback={goToCallback}
+												callback={sendData}
 											/>
 										</Card.Body>
 									</Accordion.Collapse>

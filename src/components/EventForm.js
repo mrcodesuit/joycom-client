@@ -97,7 +97,7 @@ const EventForm = ({ categoryName, categoryId, callback }) => {
 				}
 			});
 
-			if (callback) callback(eventNewId);
+			callback(eventNewId);
 
 			//Eingabefelder werden auf den Ausgangswert zurückgesetzt
 			values.name = '';

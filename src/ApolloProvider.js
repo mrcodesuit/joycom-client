@@ -24,10 +24,22 @@ const authLink = setContext(() => {
 	};
 });
 
+const defaultOptions = {
+	watchQuery: {
+		fetchPolicy: 'no-cache',
+		errorPolicy: 'ignore'
+	},
+	query: {
+		fetchPolicy: 'no-cache',
+		errorPolicy: 'all'
+	}
+};
+
 // Apollo-Client erstellen
 const client = new ApolloClient({
 	link: authLink.concat(httpLink),
-	cache: new InMemoryCache()
+	cache: new InMemoryCache(),
+	defaultOptions: defaultOptions
 });
 
 // Apollo-Client als Kontext von React festlegen

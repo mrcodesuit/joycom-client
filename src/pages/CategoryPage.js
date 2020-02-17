@@ -32,6 +32,7 @@ const CategoryPage = props => {
 	};
 
 	function sendData(eventNewId) {
+		console.log('sendData');
 		history.push(`/singleEventPage/${eventNewId}`);
 	}
 

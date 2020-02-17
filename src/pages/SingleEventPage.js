@@ -12,11 +12,11 @@ import {
 import moment from 'moment';
 import 'moment/locale/de';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { FETCH_EVENT_QUERY } from '../util/graphql';
+import history from '../history';
 
+import { FETCH_EVENT_QUERY } from '../util/graphql';
 import LikeButton from '../components/LikeButton';
 import DeleteButton from '../components/DeleteButton';
-
 import CommentButton from '../components/CommentButton';
 import Comments from '../components/Comments';
 
@@ -35,11 +35,11 @@ const SingleEventPage = props => {
 	});
 
 	const pageBack = () => {
-		window.history.back();
+		history.back();
 	};
 
 	function deleteEventCallback() {
-		window.history.back(2);
+		history.back(2);
 	}
 
 	function addUserReduceCount() {

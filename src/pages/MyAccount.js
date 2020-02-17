@@ -4,6 +4,8 @@ import moment from 'moment';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Button, Container, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import history from '../history';
 
 const MyAccount = props => {
 	const userId = props.match.params.userId;
@@ -13,7 +15,7 @@ const MyAccount = props => {
 	});
 
 	const pageBack = () => {
-		window.history.back();
+		history.back();
 	};
 
 	let myAccountMarkup;
@@ -29,9 +31,9 @@ const MyAccount = props => {
 					<span className='icon-left-circle'></span>
 					Zurück
 				</Button>
-				<Button className='category-button' href='/'>
+				<Link to='/' className='category-button btn btn-primary'>
 					<span className='icon-categories'></span> zu den Kategorien
-				</Button>
+				</Link>
 				<div className='myAccount content-wrapper'>
 					<Image src={require(`../assets/img/avatar-${avatar}.png`)} />
 					<div className='accountInfos'>

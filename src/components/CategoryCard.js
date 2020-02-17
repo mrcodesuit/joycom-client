@@ -18,13 +18,10 @@ const CategoryCard = ({ category }) => {
 							<></>
 						) : (
 							<>
-								<Card.Link className='counter' href={`/categoryPage/${_id}`}>
-									Events: {eventCount}
-								</Card.Link>
-								<Card.Link
-									className='arrow'
-									href={`/categoryPage/${_id}`}
-								></Card.Link>
+								<div>
+									<div className='card-link counter'>Events: {eventCount}</div>
+									<div className='card-link arrow'>Events: {eventCount}</div>
+								</div>
 							</>
 						)}
 					</Card.ImgOverlay>

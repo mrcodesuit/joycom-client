@@ -10,6 +10,7 @@ import {
 	Spinner,
 	Button
 } from 'react-bootstrap';
+import history from '../history';
 
 import { AuthContext } from '../context/auth';
 import { FETCH_CATEGORY_EVENTS_QUERY } from '../util/graphql';
@@ -26,7 +27,7 @@ const CategoryPage = props => {
 	console.log(data);
 
 	const pageBack = () => {
-		window.history.back();
+		history.back();
 	};
 
 	if (data) {
@@ -80,7 +81,7 @@ const CategoryPage = props => {
 
 					<Row>
 						{data &&
-							data.getEventsCategory.reverse().map((event, index) => (
+							data.getEventsCategory.map((event, index) => (
 								<Col key={index} xs={12} lg={6}>
 									<EventItem event={event} />
 								</Col>

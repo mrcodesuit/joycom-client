@@ -17,7 +17,6 @@ const DeleteButton = ({ eventId, commentId, category, callback }) => {
 
 	const { data } = useQuery(FETCH_CATEGORY_QUERY, {
 		variables: { category }
-		// fetchPolicy: 'no-cache'
 	});
 
 	if (data) {

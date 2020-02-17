@@ -24,7 +24,12 @@ const Home = () => {
 	const { loading, data } = useQuery(FETCH_CATEGORIES_QUERY);
 	let history = useHistory();
 
-	const goToCallback = eventNewId => {
+	// const  = proxy.readQuery({
+	// 	query: FETCH_CATEGORY_EVENTS_QUERY,
+	// 	variables: { categoryId: _id }
+	// });
+
+	const goToCallback = (eventNewId) => {
 		history.push(`/singleEventPage/${eventNewId}`);
 	};
 

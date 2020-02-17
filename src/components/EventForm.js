@@ -4,7 +4,6 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col, Button, Form, ListGroup } from 'react-bootstrap';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import de from 'date-fns/locale/de';
-import { useHistory, withRouter } from 'react-router-dom';
 
 import {
 	FETCH_CATEGORIES_QUERY,
@@ -96,7 +95,7 @@ const EventForm = ({ categoryName, categoryId, callback }) => {
 				}
 			});
 
-			callback(eventNewId);
+			if (callback) callback(eventNewId);
 
 			//Eingabefelder werden auf den Ausgangswert zurückgesetzt
 			values.name = '';
@@ -319,4 +318,4 @@ const CREATE_EVENT_MUTATION = gql`
 	}
 `;
 
-export default withRouter(EventForm);
+export default EventForm;

@@ -78,6 +78,7 @@ const CategoryPage = props => {
 										<Card.Body>
 											<EventForm
 												categoryName={categoryName}
+												categoryId={categoryId}
 												callback={sendData}
 											/>
 										</Card.Body>
@@ -144,6 +145,7 @@ const CategoryPage = props => {
 											<EventForm
 												categoryName={categoryName}
 												callback={sendData}
+												categoryId={categoryId}
 											/>
 										</Card.Body>
 									</Accordion.Collapse>

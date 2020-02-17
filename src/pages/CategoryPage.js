@@ -30,10 +30,10 @@ const CategoryPage = props => {
 		history.go(-1);
 	};
 
-	function sendData(eventNewId) {
+	const sendData = eventNewId => {
 		console.log('sendData');
 		history.push(`/singleEventPage/${eventNewId}`);
-	}
+	};
 
 	if (data) {
 		var eventsCount = data.getEventsCategory.length > 0;
@@ -141,7 +141,10 @@ const CategoryPage = props => {
 
 									<Accordion.Collapse eventKey='0'>
 										<Card.Body>
-											<EventForm />
+											<EventForm
+												categoryName={categoryName}
+												callback={sendData}
+											/>
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>

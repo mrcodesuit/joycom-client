@@ -12,8 +12,7 @@ import {
 } from '../util/graphql';
 import { useForm } from '../util/hooks';
 
-const EventForm = ({ categoryName, categoryId }) => {
-	let history = useHistory();
+const EventForm = ({ categoryName, categoryId, callback }) => {
 	const [errors, setErrors] = useState({});
 
 	const [selectCategory, setSelectCategory] = useState(categoryName);
@@ -98,7 +97,7 @@ const EventForm = ({ categoryName, categoryId }) => {
 				}
 			});
 
-			history.push(`/singleEventPage/${eventNewId}`);
+			if (callback) callback(eventNewId);
 
 			//Eingabefelder werden auf den Ausgangswert zurückgesetzt
 			values.name = '';

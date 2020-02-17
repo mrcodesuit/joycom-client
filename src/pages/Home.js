@@ -11,6 +11,7 @@ import {
 	Spinner
 } from 'react-bootstrap';
 import { useQuery } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 import { FETCH_CATEGORIES_QUERY } from '../util/graphql';
@@ -21,6 +22,11 @@ import EventForm from '../components/EventForm';
 const Home = () => {
 	const { user } = useContext(AuthContext);
 	const { loading, data } = useQuery(FETCH_CATEGORIES_QUERY);
+	let history = useHistory();
+
+	const goToCallback = eventNewId => {
+		history.push(`/singleEventPage/${eventNewId}`);
+	};
 
 	return (
 		<>
@@ -70,7 +76,7 @@ const Home = () => {
 
 								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
-										<EventForm />
+										<EventForm callback={goToCallback} />
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>

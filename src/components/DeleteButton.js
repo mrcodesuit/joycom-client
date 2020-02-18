@@ -9,10 +9,13 @@ import {
 	FETCH_CATEGORIES_QUERY
 } from '../util/graphql';
 
-const DeleteButton = (
-	{ eventId, commentId, category, callback },
+const DeleteButton = ({
+	eventId,
+	commentId,
+	category,
+	callback,
 	categoryId
-) => {
+}) => {
 	const [show, setShow] = useState(false);
 
 	const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_EVENT_MUTATION;
@@ -24,11 +27,11 @@ const DeleteButton = (
 			if (!commentId && category) {
 				const data = proxy.readQuery({
 					query: FETCH_CATEGORY_EVENTS_QUERY,
-					variables: categoryId
+					variables: { categoryId }
 				});
 				proxy.writeQuery({
 					query: FETCH_CATEGORY_EVENTS_QUERY,
-					variables: categoryId,
+					variables: { categoryId },
 					data: {
 						getEventsCategory: data.getEventsCategory.filter(
 							event => event._id.toString() !== eventId
@@ -43,7 +46,7 @@ const DeleteButton = (
 					query: FETCH_CATEGORIES_QUERY,
 					data: {
 						getCategories: prevData.getCategories.forEach(category => {
-							if (category._id.toString() === _id) {
+							if (category._id.toString() === categoryId) {
 								category.eventCount -= 1;
 							}
 						})

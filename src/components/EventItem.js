@@ -10,7 +10,7 @@ import DeleteButton from './DeleteButton';
 import CommentButton from './CommentButton';
 import { AuthContext } from '../context/auth';
 
-const EventItem = ({ event }) => {
+const EventItem = ({ event, categoryId }) => {
 	const { user } = useContext(AuthContext);
 	const {
 		_id,
@@ -90,7 +90,7 @@ const EventItem = ({ event }) => {
 						<DeleteButton
 							eventId={_id}
 							category={category}
-							// callback={pageBack}
+							categoryId={categoryId}
 						/>
 						<OverlayTrigger
 							overlay={

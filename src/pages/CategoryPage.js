@@ -143,28 +143,30 @@ const CategoryPage = props => {
 							<Button className=' mt-3' href='/'>
 								zu den Kategorien
 							</Button>
-							<Accordion className='addEventAccordion'>
-								<Card>
-									<Accordion.Toggle
-										className='mt-3 toggleButton'
-										as={Button}
-										variant='primary'
-										eventKey='0'
-									>
-										Neues Event
-									</Accordion.Toggle>
+							{user && (
+								<Accordion className='addEventAccordion'>
+									<Card>
+										<Accordion.Toggle
+											className='mt-3 toggleButton'
+											as={Button}
+											variant='primary'
+											eventKey='0'
+										>
+											Neues Event
+										</Accordion.Toggle>
 
-									<Accordion.Collapse eventKey='0'>
-										<Card.Body>
-											<EventForm
-												categoryName={categoryName}
-												callback={sendData}
-												categoryId={categoryId}
-											/>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
+										<Accordion.Collapse eventKey='0'>
+											<Card.Body>
+												<EventForm
+													categoryName={categoryName}
+													callback={sendData}
+													categoryId={categoryId}
+												/>
+											</Card.Body>
+										</Accordion.Collapse>
+									</Card>
+								</Accordion>
+							)}
 						</div>
 
 						<Row>

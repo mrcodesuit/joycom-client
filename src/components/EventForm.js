@@ -13,7 +13,6 @@ import { useForm } from '../util/hooks';
 
 const EventForm = ({ categoryName, categoryId, callback }) => {
 	const [errors, setErrors] = useState({});
-
 	const [selectCategory, setSelectCategory] = useState(categoryName);
 
 	/**Datepicker**/
@@ -90,7 +89,7 @@ const EventForm = ({ categoryName, categoryId, callback }) => {
 				}
 			});
 
-			if (callback) callback(eventNewId);
+			callback(eventNewId);
 
 			//Eingabefelder werden auf den Ausgangswert zurückgesetzt
 			values.name = '';
@@ -221,7 +220,7 @@ const EventForm = ({ categoryName, categoryId, callback }) => {
 															key={`inline-radio-${index}`}
 															inline
 															value={category.name}
-															checked={selectCategory === category.name}
+															checked={category.name === selectCategory}
 															onChange={e => setSelectCategory(category.name)}
 															name='category'
 															label={category.name}

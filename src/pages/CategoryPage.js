@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import {
 	Accordion,
@@ -13,34 +13,48 @@ import {
 import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
-import { FETCH_CATEGORY_EVENTS_QUERY } from '../util/graphql';
+import {
+	FETCH_CATEGORY_EVENTS_QUERY,
+	FETCH_CATEGORIES_QUERY
+} from '../util/graphql';
 import EventItem from '../components/EventItem';
 import EventForm from '../components/EventForm';
 
 const CategoryPage = props => {
 	const categoryId = props.match.params.categoryId;
+	const [categoryName, setCategoryName] = useState('');
+	const [isEventCount, setIsEventCount] = useState(null);
 	const { user } = useContext(AuthContext);
 	let history = useHistory();
 
-	const { loading, data } = useQuery(FETCH_CATEGORY_EVENTS_QUERY, {
-		variables: { categoryId }
-	});
+	const { data: dataFCEQ, loading: loadingFCEQ } = useQuery(
+		FETCH_CATEGORY_EVENTS_QUERY,
+		{
+			variables: { categoryId }
+		}
+	);
+
+	const { data: dataFCQ } = useQuery(FETCH_CATEGORIES_QUERY);
+
+	useEffect(() => {
+		if (dataFCQ) {
+			var currentCategory = dataFCQ.getCategories.filter(
+				category => category._id === categoryId
+			);
+			setCategoryName(currentCategory[0].name);
+			currentCategory[0].eventCount === 0
+				? setIsEventCount(false)
+				: setIsEventCount(true);
+		}
+	}, [categoryId, dataFCEQ, dataFCQ]);
 
 	const pageBack = () => {
 		history.go(-1);
 	};
 
 	const sendData = eventNewId => {
-		console.log('sendData');
 		history.push(`/singleEventPage/${eventNewId}`);
 	};
-
-	if (data) {
-		var eventsCount = data.getEventsCategory.length > 0;
-		if (eventsCount) {
-			var categoryName = data.getEventsCategory[0].category;
-		}
-	}
 
 	const categoryMarkup = (
 		<>
@@ -89,8 +103,8 @@ const CategoryPage = props => {
 					</div>
 
 					<Row>
-						{data &&
-							data.getEventsCategory.map((event, index) => (
+						{dataFCEQ &&
+							dataFCEQ.getEventsCategory.map((event, index) => (
 								<Col key={index} xs={12} lg={6}>
 									<EventItem event={event} />
 								</Col>
@@ -103,9 +117,9 @@ const CategoryPage = props => {
 
 	return (
 		<>
-			{eventsCount ? (
+			{isEventCount ? (
 				<>
-					{loading ? (
+					{loadingFCEQ ? (
 						<Spinner animation='border' variant='primary' />
 					) : (
 						<>{categoryMarkup}</>

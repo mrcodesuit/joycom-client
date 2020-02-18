@@ -7,7 +7,7 @@ const CategoryCard = ({ category }) => {
 
 	return (
 		<>
-			<LinkContainer to={eventCount < 1 ? '' : `/categoryPage/${_id}`}>
+			<LinkContainer to={`/categoryPage/${_id}`}>
 				<Card className={`category bg-dark text-white category_${_id}`}>
 					<Card.Img
 						src={require(`../assets/img/categoryThumbnail_${_id}.jpg`)}

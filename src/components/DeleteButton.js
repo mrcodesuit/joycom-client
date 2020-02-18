@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 
 import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import {
 	FETCH_CATEGORY_EVENTS_QUERY,
-	FETCH_CATEGORY_QUERY,
 	FETCH_CATEGORIES_QUERY
 } from '../util/graphql';
 
-const DeleteButton = ({ eventId, commentId, category, callback }) => {
+const DeleteButton = (
+	{ eventId, commentId, category, callback },
+	categoryId
+) => {
 	const [show, setShow] = useState(false);
 
 	const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_EVENT_MUTATION;
-
-	const { data } = useQuery(FETCH_CATEGORY_QUERY, {
-		variables: { category }
-	});
-
-	if (data) {
-		var { _id } = data.getCategory;
-	}
 
 	const [deleteEventOrCommentMutation] = useMutation(mutation, {
 		update(proxy) {
@@ -30,11 +24,11 @@ const DeleteButton = ({ eventId, commentId, category, callback }) => {
 			if (!commentId && category) {
 				const data = proxy.readQuery({
 					query: FETCH_CATEGORY_EVENTS_QUERY,
-					variables: { categoryId: _id }
+					variables: categoryId
 				});
 				proxy.writeQuery({
 					query: FETCH_CATEGORY_EVENTS_QUERY,
-					variables: { categoryId: _id },
+					variables: categoryId,
 					data: {
 						getEventsCategory: data.getEventsCategory.filter(
 							event => event._id.toString() !== eventId

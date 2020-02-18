@@ -106,7 +106,7 @@ const CategoryPage = props => {
 						{dataFCEQ &&
 							dataFCEQ.getEventsCategory.map((event, index) => (
 								<Col key={index} xs={12} lg={6}>
-									<EventItem event={event} />
+									<EventItem event={event} categoryId={categoryId} />
 								</Col>
 							))}
 					</Row>

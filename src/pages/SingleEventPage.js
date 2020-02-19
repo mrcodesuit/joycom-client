@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import {
@@ -14,7 +14,7 @@ import 'moment/locale/de';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
-import { FETCH_EVENT_QUERY } from '../util/graphql';
+import { FETCH_EVENT_QUERY, FETCH_CATEGORIES_QUERY } from '../util/graphql';
 import LikeButton from '../components/LikeButton';
 import DeleteButton from '../components/DeleteButton';
 import CommentButton from '../components/CommentButton';
@@ -24,12 +24,28 @@ import { AuthContext } from '../context/auth';
 
 const SingleEventPage = props => {
 	const { user } = useContext(AuthContext);
+	const [categoryId, setCategoryId] = useState('');
 	let history = useHistory();
 
 	const eventId = props.match.params.eventId;
-	const { data } = useQuery(FETCH_EVENT_QUERY, {
+	const { data: dataFEQ, loading: loadingFEQ } = useQuery(FETCH_EVENT_QUERY, {
 		variables: { eventId }
 	});
+
+	const { data: dataFCQ } = useQuery(FETCH_CATEGORIES_QUERY);
+
+	useEffect(() => {
+		if (!loadingFEQ) {
+			if (dataFCQ) {
+				var getCategoryId = dataFCQ.getCategories.forEach(category => {
+					if (category.name === dataFEQ.getEvent.category) {
+						console.log(category._id);
+						setCategoryId(category._id);
+					}
+				});
+			}
+		}
+	}, [dataFCQ, dataFEQ, loadingFEQ]);
 
 	const [addUser] = useMutation(ADD_USER_MUTATION, {
 		variables: { eventId }
@@ -69,7 +85,7 @@ const SingleEventPage = props => {
 		window.scrollBy({ top: 300, left: 0, behavior: 'smooth' });
 	}
 
-	if (data) {
+	if (dataFEQ) {
 		const {
 			_id,
 			name,
@@ -86,7 +102,7 @@ const SingleEventPage = props => {
 			likeCount,
 			comments,
 			commentCount
-		} = data.getEvent;
+		} = dataFEQ.getEvent;
 
 		var eventMarkup = (
 			<>
@@ -165,6 +181,7 @@ const SingleEventPage = props => {
 										eventId={_id}
 										callback={deleteEventCallback}
 										category={category}
+										categoryId={categoryId}
 									/>
 								) : user ? (
 									userList.find(
